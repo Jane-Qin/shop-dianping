@@ -6,7 +6,7 @@ class Category extends Component {
     render() {
         const setting={
             dots:true,
-            arrow:false,
+            arrows:false,
             sliderToShow:1,
             swipeToSlide:true,
             autoPlay:true
