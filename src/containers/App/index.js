@@ -1,6 +1,7 @@
 import './style.css';
 import React, { Component } from 'react';
-import ErrorToast from '../../components/ErrorToast'
+import ErrorToast from '../../components/ErrorToast';
+import Home from "../Home";
 import { actions as appActions,getError } from '../../redux/modules/app';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
@@ -10,6 +11,7 @@ class App extends Component {
     const {error,appActions:{clearError}}=this.props;
     return (
       <div className="App">
+      <Home/>
         {error?<ErrorToast msg={error} clearError={clearError}/>:null}
       </div>
     );

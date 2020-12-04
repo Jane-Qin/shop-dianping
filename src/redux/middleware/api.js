@@ -28,7 +28,7 @@ export default (store) => (next) => (action) => {
   if (!schema) {
     throw new Error("必须指定领域实体的schema");
   }
-  if (!Array.isArray(tyeps) && types.length !== 3) {
+  if (!Array.isArray(types) && types.length !== 3) {
     throw new Error("需要指定一个包含了3个action type的数组");
   }
   if (!types.every((type) => typeof type === "string")) {

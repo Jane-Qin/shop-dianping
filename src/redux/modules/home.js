@@ -37,18 +37,6 @@ export const actions={
             const endpoint=url.getProductList(0,10);
             return dispatch(fetchLikes(endpoint))
         }
-    },
-    loadLidkes:()=>{
-        return (dispatch,getState)=>{
-            dispatch(fetchLikesRequest());
-            return get(url.getProductList(0,10)).then(data=>{
-                dispatch(fetchLikesSuccess(data));
-                dispatch(action)
-            },
-            error=>{
-                dispatch(fetchLikesFailure(error))
-            })
-        }
     }
 }
 const reducer=(state={},action)=>{
