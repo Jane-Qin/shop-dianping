@@ -12,7 +12,7 @@ class Headline extends Component {
     };
     return (
       <div className="headline">
-        <div className="headline__logo"></div>
+        <div className="headline__logo"/>
         <div className="headline__slider">
           <Slider {...settings}>
             {dataSource.map((item, index) => {
