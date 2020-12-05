@@ -57,14 +57,14 @@ export const actions={
         }
     },
     //加载特惠商品
-    loadDiscount:()=>{
+    loadDiscounts:()=>{
         return (dispatch,getState)=>{
             const endPoint=url.getProductList(
                 params.PATH_DISCOUNTS,
                 0,
                 params.PAGE_SIZE_DISCOUNTS
             );
-            return dispatch(fetchDiscounts(endpoint));
+            return dispatch(fetchDiscounts(endPoint));
         }
     }
 };
@@ -105,4 +105,22 @@ const discounts=(state=initialState.discounts,action)=>{
     }
 };
 
-export default reducer=combineReducers({likes,discounts});
+export default combineReducers({likes,discounts});
+
+//selectors
+//获取猜你喜欢state
+export const getLikes=(state)=>{
+    return state.home.likes.ids.map(id=>{
+        return state.entities.products[id]
+    })
+}
+//获取猜你喜欢的页数
+export const getPageCountOfLikes=state=>{
+    return state.home.likes.pageCount
+};
+//获取特惠商品state
+export const getDiscounts=(state)=>{
+    return state.home.discounts.ids.map(id=>{
+        return state.entities.products[id]
+    })
+}
