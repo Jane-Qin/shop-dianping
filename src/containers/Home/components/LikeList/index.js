@@ -33,8 +33,16 @@ class LikeList extends Component {
         );
     }
     componentDidMount(){
-        document.addEventListener("scroll",this.handleScroll);
-        this.props.fetchData();
+        //利用redux缓存层作用
+        if(this.props.pageCount<3){
+            document.addEventListener("scroll",this.handleScroll);
+        }else{
+            this.removeListener=true;
+        }
+        
+        if(this.props.pageCount===0){
+            this.props.fetchData();
+        }
     }
     componentWillUnmount(){
         //解除事件监听，防止内存泄漏

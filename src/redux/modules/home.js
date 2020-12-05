@@ -59,6 +59,11 @@ export const actions={
     //加载特惠商品
     loadDiscounts:()=>{
         return (dispatch,getState)=>{
+            //将statez中的特惠商品数据作为缓存数据直接使用，不再重复获取
+            const {ids}=getState().home.discounts;
+            if(ids.length>0){
+                return null;
+            }
             const endPoint=url.getProductList(
                 params.PATH_DISCOUNTS,
                 0,
