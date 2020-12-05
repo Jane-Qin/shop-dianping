@@ -1,4 +1,4 @@
-import { get } from "../../utils/request"
+import { combineReducers } from "redux";
 import url from "../../utils/url";
 import {schema} from  "./entities/products";
 import {FETCH_DATA} from "../middleware/api"
@@ -74,18 +74,35 @@ const initialState={
         pageCount:0,
         ids:[]
     },
-    discount:{
+    discounts:{
         isFetching:false,
         ids:[]
     }
 }
-const reducer=(state={},action)=>{
+//猜你喜欢reducer
+const likes=(state=initialState.likes,action)=>{
     switch(action.type){
         case types.FETCH_LIKES_REQUEST:
+            return {...state,isFetching:true};
         case types.FETCH_LIKES_SUCCESS:
+            return {...state,isFetching:false,pageCount:state.pageCount+1,ids:state.ids.concat(action.response.ids)}
         case types.FETCH_LIKES_FAILURE:
+            return {...state,isFetching:false}   //错误处理，在app.js中进行了
         default:
-        return state;
+            return state;
     }
 }
-export default reducer;
+const discounts=(state=initialState.discounts,action)=>{
+    switch(action.type){
+        case types.FETCH_DISCOUNTS_REQUEST:
+            return {...state,isFetching:true};
+        case types.FETCH_DISCOUNTS_SUCCESS:
+            return {...state,isFetching:false,ids:state.ids.concat(action.response.ids)};
+        case types.FETCH_DISCOUNTS_FAILURE:
+            return {...state,isFetching:false}
+        default:
+            return state;
+    }
+};
+
+export default reducer=combineReducers({likes,discounts});
