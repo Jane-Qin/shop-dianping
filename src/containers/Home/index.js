@@ -6,6 +6,7 @@ import LikeList from './components/LikeList';
 import HomeHeader from "./components/HomeHeader";
 import Activity from "./components/Activity";
 import Banner from "./components/Banner";
+import Footer from '../../components/Footer'
 
 class Home extends Component {
     render() {
@@ -18,6 +19,7 @@ class Home extends Component {
                 <Activity/>            
                 <Discount/>
                 <LikeList/>
+                <Footer/>
             </div>
         );
     }
