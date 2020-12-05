@@ -16,7 +16,7 @@ import { get } from "../../utils/request";
 //经过中间件处理的action所具有的标识
 export const FETCH_DATA = "FETCH DATA";
 
-export default (store) => (next) => (action) => {
+export default store => (next) => (action) => {
   const callAPI = action[FETCH_DATA];
   if (typeof callAPI === "undefined") {
     return next(action);
