@@ -2,9 +2,10 @@ import './style.css';
 import React, { Component } from 'react';
 import ErrorToast from '../../components/ErrorToast';
 import Home from "../Home";
+import ProductDetail from "../ProductDetail";
 import { actions as appActions,getError } from '../../redux/modules/app';
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
       <div className="App">
       <Router>
         <Switch>
-          <Route path="/" component={Home}></Route>
+        <Route path="/detail/:id" component={ProductDetail}/>
+          <Route path="/" component={Home}/>
         </Switch>
       </Router>
         {error?<ErrorToast msg={error} clearError={clearError}/>:null}
