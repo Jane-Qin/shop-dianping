@@ -22,7 +22,7 @@ class ProductOverview extends Component {
             </div>
           </div>
           <div className="productOverview__purchase">
-            <span e="productOverview__symbol">¥</span>
+            <span className="productOverview__symbol">¥</span>
             <span className="productOverview__price">19.9</span>
             <span className="productOverview__price--old">¥48</span>
             <a className="productOverview__btn">立即购买</a>
