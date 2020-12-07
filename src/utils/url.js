@@ -7,5 +7,11 @@ export default {
     },
     getShopById:(id)=>{
         return `/mock/shops/${id}.json`
+    },
+    getRelatedKeywords:(text)=>{
+        return `/mock/keywords/related.json?keyword=${text}`
+    },
+    getPopularKeywords:()=>{
+        return `/mock/keywords/popular.json`
     }
 }
