@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import url from "../../utils/url";
 import { FETCH_DATA } from "../middleware/api";
-import { getProductDetail, schema as productSchema } from "./entities/products";
-import { getShopDetail, schema as shopSchema } from "./entities/shops";
+import { getProductById, getProductDetail, schema as productSchema } from "./entities/products";
+import { getShopById, schema as shopSchema } from "./entities/shops";
 
 export const types = {
   //获取产品详情
@@ -39,7 +39,7 @@ export const actions = {
   loadShopDetail: (id) => {
     return (dispatch, getState) => {
       //从state缓存中读取数据
-      const shop = getShopDetail(getState(), id);
+      const shop = getShopById(getState(), id);
       if (shop) {
         return dispatch(fetchShopDetailSuccess(id));
       }
@@ -49,27 +49,27 @@ export const actions = {
   },
 };
 
-const fetchProductDetail = (endPoint, params) => ({
+const fetchProductDetail = (endpoint, params) => ({
   [FETCH_DATA]: {
     types: [
       types.FETCH_PRODUCT_DETAIL_REQUEST,
       types.FETCH_PRODUCT_DETAIL_SUCCESS,
       types.FETCH_PRODUCT_DETAIL_FAILURE,
     ],
-    endPoint,
-    productSchema,
+    endpoint,
+    schema:productSchema,
   },
   params,
 });
-const fetchShopDetail = (endPoint, params) => ({
+const fetchShopDetail = (endpoint, params) => ({
   [FETCH_DATA]: {
     types: [
       types.FETCH_SHOP_DETAIL_REQUEST,
       types.FETCH_SHOP_DETAIL_SUCCESS,
       types.FETCH_SHOP_DETAIL_FAILURE,
     ],
-    endPoint,
-    shopSchema,
+    endpoint,
+    schema:shopSchema,
   },
   params,
 });
@@ -111,3 +111,18 @@ const reducer = combineReducers({
   relatedShop,
 });
 export default reducer;
+
+//selector
+//获取商品详情
+export const getProduct=(state,id)=>{
+    return getProductDetail(state,id);
+}
+//获取关联店铺的信息
+export const getRelatedShop=(state,productId)=>{
+    const product=getProductById(state,productId);
+    let shopId=product?product.nearestShop:null;
+    if(shopId){
+        return getShopById(state,shopId);
+    }
+    return null;
+}
